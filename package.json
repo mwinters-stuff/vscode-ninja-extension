@@ -1,0 +1,358 @@
+{
+  "name": "ninjabuild",
+  "displayName": "ninjabuild",
+  "description": "Ninja Build plugin",
+  "publisher":"mwinters-stuff",
+  "version": "0.0.4",
+  "icon": "resources/ninja-logo.png",
+  "homepage": "https://github.com/mwinters-stuff/vscode-ninja-extension",
+  "repository": {"url": "https://github.com/mwinters-stuff/vscode-ninja-extension"},
+  "engines": {
+    "vscode": "^1.53.0"
+  },
+  "extensionDependencies": [
+    "vadimcn.vscode-lldb"
+   ],
+  "categories": [
+    "Other"
+  ],
+  "keywords": ["c","c++","ninja","build"],
+  "activationEvents": [
+    "onDebug",
+    "onView:ninjaFavourites",
+    "onView:ninjaDebug",
+    "onView:ninjaRelease",
+    "onCommand:ninjaTargets.refresh",
+    "onCommand:ninjaCommand.createTestMateConfig",
+    "onCommand:ninjaCommand.createCPPConfig",
+    "onCommand:workbench.action.tasks.runTask"
+  ],
+  "main": "./out/extension.js",
+  "contributes": {
+    "viewsContainers": {
+      "activitybar": [
+        {
+          "id": "ninjaBuildView",
+          "title": "Ninja",
+          "icon": "resources/ninja.svg"
+        }
+      ]
+    },
+    "views": {
+      "ninjaBuildView": [
+        {
+          "id": "ninjaFavourites",
+          "name": "Favourites"
+        },
+        {
+          "id": "ninjaDebug",
+          "name": "Debug"
+        },
+        {
+          "id": "ninjaRelease",
+          "name": "Release"
+        }
+      ]
+    },
+    "commands": [
+      {
+        "command": "ninjaTargets.refresh",
+        "title": "Refresh",
+        "icon": "$(refresh)"
+      },
+      {
+        "command": "ninjaTargets.buildAllDebug",
+        "title": "Build All",
+        "icon": "$(package)"
+      },
+      {
+        "command": "ninjaTargets.buildAllRelease",
+        "title": "Build All",
+        "icon": "$(package)"
+      },
+      {
+        "command": "ninjaTargets.buildAllFavourites",
+        "title": "Build All",
+        "icon": "$(package)"
+      },
+      {
+        "command": "ninjaTargets.runAll",
+        "title": "Run All",
+        "icon": "$(play)"
+      },
+      {
+        "command": "ninjaTargets.build",
+        "title": "Build",
+        "icon": "$(package)"
+      },
+      {
+        "command": "ninjaTargets.run",
+        "title": "Run",
+        "icon": "$(play)"
+      },
+      {
+        "command": "ninjaTargets.debug",
+        "title": "Debug",
+        "icon": "$(debug)"
+      },
+      {
+        "command": "ninjaTargets.favourite",
+        "title": "Favourite",
+        "icon": "$(heart)"
+      },
+      {
+        "command": "ninjaTargets.favouriteIs",
+        "title": "Favourite",
+        "icon":{
+          "light": "resources/light/heart-filled.svg",
+          "dark": "resources/dark/heart-filled.svg"
+        }
+      },
+      {
+        "command": "ninjaTargets.createLaunchConfiguration",
+        "title": "Create Launch Configuration",
+        "icon": "$(play)"
+      },
+      {
+        "command": "ninjaCommand.createTestMateConfig",
+        "title": "CTCT: Create TestMate Config",
+        "icon": "$(test)"
+      },
+      {
+        "command": "ninjaCommand.createCPPConfig",
+        "title": "CTCT: Create CPP Config",
+        "icon": "$(settings)"
+      },
+      {
+        "command": "ninjaCommand.flushCaches",
+        "title": "CTCT: Flush Caches and Reload",
+        "icon": "$(settings)"
+      }
+    ],
+    "menus": {
+      "commandPalette": [
+        {
+          "command":"ninjaCommand.createTestMateConfig"
+        },
+        {
+          "command":"ninjaCommand.createCPPConfig"
+        },
+        {
+          "command":"ninjaCommand.flushCaches"
+        }
+
+      ],
+      "view/title": [
+        {
+          "command": "ninjaTargets.refresh",
+          "when": "view =~ /^(ninjaDebug|ninjaRelease|ninjaFavourites)$/",
+          "group": "navigation"
+        },
+        {
+          "command": "ninjaTargets.buildAllDebug",
+          "when": "view == ninjaDebug",
+          "group": "navigation"
+        },
+        {
+          "command": "ninjaTargets.buildAllRelease",
+          "when": "view == ninjaRelease",
+          "group": "navigation"
+        },
+        {
+          "command": "ninjaTargets.buildAllFavourites",
+          "when": "view == ninjaFavourites",
+          "group": "navigation"
+        },
+        {
+          "command": "ninjaTargets.runAll",
+          "when": "view == ninjaFavourites",
+          "group": "navigation"
+        }
+      ],
+      "view/item/context": [
+        {
+          "command": "ninjaTargets.build",
+          "when": "viewItem =~ /^ninjaTarget(Debug|Release|Favourite).*$/",
+          "group": "inline@1"
+        },
+        {
+          "command": "ninjaTargets.run",
+          "when": "viewItem =~ /^ninjaTarget(Debug|Release|Favourite).*$/",
+          "group": "inline@3"
+        },
+        {
+          "command": "ninjaTargets.debug",
+          "when": "viewItem =~ /^ninjaTarget(Debug|Release|Favourite).*$/",
+          "group": "inline@2"
+        },
+        {
+          "command": "ninjaTargets.favourite",
+          
+          "when": "viewItem =~ /^ninjaTarget(Debug|Release|Favourite)$/",
+          "group": "inline@4"
+        },
+        {
+          "command": "ninjaTargets.favouriteIs",
+          "when": "viewItem =~ /^ninjaTarget(Debug|Release|Favourite)-favourite$/",
+          "group": "inline@4"
+        },
+        {
+          "command": "ninjaTargets.build",
+          "when": "viewItem =~ /^ninjaTarget(Debug|Release|Favourite).*$/",
+          "group": "menu@1"
+        },
+        {
+          "command": "ninjaTargets.run",
+          "when": "viewItem =~ /^ninjaTarget(Debug|Release|Favourite).*$/",
+          "group": "menu@3"
+        },
+        {
+          "command": "ninjaTargets.debug",
+          "when": "viewItem =~ /^ninjaTarget(Debug|Release|Favourite).*$/",
+          "group": "menu@2"
+        },
+        {
+          "command": "ninjaTargets.createLaunchConfiguration",
+          "when": "viewItem =~ /^ninjaTarget(Debug|Release|Favourite).*$/",
+          "group": "menu@5"
+        }
+      ]
+    },
+    "taskDefinitions": [
+      {
+        "type": "ninja-build",
+        "required": [
+          "target"
+        ],
+        "properties": {
+          "target": {
+            "type": "string",
+            "description": "The ninja target to build"
+          }
+        }
+      }
+    ],
+    "configuration": {
+      "title": "NinjaBuild",
+      "properties": {
+        "ninjabuild.ninjaExecutable": {
+          "description": "Ninja executable path",
+          "type": "string",
+          "default": "ninja",
+          "scope": "window"
+        },
+        "ninjabuild.ninjaAlternateBuildExecutable": {
+          "description": "Ninja alternat build executable/script path",
+          "type": "string",
+          "default": "",
+          "scope": "window"
+        },
+        "ninjabuild.ninjaArguments": {
+          "description": "Additional arguments for ninja to build with",
+          "type": "array",
+          "default": [
+            "-j",
+            "10"
+          ],
+          "scope": "window"
+        },
+        "ninjabuild.ninjaBuildPath": {
+          "description": "Path to the build.ninja file",
+          "type": "string",
+          "default": "generated",
+          "scope": "window"
+        },
+        "ninjabuild.ninjaProjectRoot": {
+          "description": "Path To projet root - prepended to application paths",
+          "type": "string",
+          "default": "${workspaceFolder}",
+          "scope": "window"
+        },
+        "ninjabuild.debugSourceMap": {
+          "description": "Debugger source map",
+          "type": "object",
+          "default": {},
+          "scope": "window"
+        },
+        "ninjabuild.debugEnv": {
+          "description": "Debugger environment",
+          "type": "object",
+          "default": {},
+          "scope": "window"
+        },
+        "ninjabuild.runConfigurations": {
+          "description": "Run configurations for applications",
+          "type": "object",
+          "default": {},
+          "scope": "window"
+        },
+        "ninjabuild.testExecutablesPath":{
+          "description": "Location of test executables",
+          "type":"string",
+          "default":"${workspaceFolder}",
+          "scope":"window"
+        },
+        "ninjabuild.testExecutablesArguments":{
+          "description": "Arguments to prepend to gtest",
+          "type":"array",
+          "default":[],
+          "scope":"window"
+        },
+        "ninjabuild.filters.targetincludefilter":{
+          "description": "Regex to include target based on filename",
+          "type":"string",
+          "default":"^.*\/linux\/.*[^\\.a]$",
+          "scope": "window"
+        },
+        "ninjabuild.filters.debugtargetfilter":{
+          "description": "Regex to filter debug targets, filter on target name",
+          "type":"string",
+          "default":"^.*(_debug_linux)$",
+          "scope": "window"
+        },
+        "ninjabuild.filters.releasetargetfilter":{
+          "description": "Regex to filter release targets, filter on target name",
+          "type":"string",
+          "default":"^.*(_release_linux)$",
+          "scope": "window"
+        },
+        "ninjabuild.cppconfig.includePaths": {
+          "description": "Paths of paths and sub paths to add to cpp config relative to workspace folder",
+          "type":"array",
+          "scope": "window",
+          "default": []
+        },
+        "ninjabuild.cppconfig.defines":{
+          "description": "defines to add to the cpp config",
+          "type":"array",
+          "scope": "window",
+          "default":[]
+        }
+      }
+    }
+  },
+  "scripts": {
+    "vscode:prepublish": "yarn run compile",
+    "compile": "tsc -p ./",
+    "watch": "tsc -watch -p ./",
+    "pretest": "yarn run compile && yarn run lint",
+    "lint": "eslint src --ext ts",
+    "test": "node ./out/test/runTest.js",
+    "package": "vsce package"
+  },
+  "devDependencies": {
+    "@types/glob": "^7.1.3",
+    "@types/mocha": "^8.0.4",
+    "@types/node": "^12.11.7",
+    "@types/vscode": "^1.53.0",
+    "@typescript-eslint/eslint-plugin": "^4.14.1",
+    "@typescript-eslint/parser": "^4.14.1",
+    "eslint": "^7.19.0",
+    "glob": "^7.1.6",
+    "mocha": "^8.2.1",
+    "typescript": "^4.1.3",
+    "vscode-test": "^1.5.0",
+    "vsce": "^1.85.1"
+  },
+  "dependencies": {}
+}
