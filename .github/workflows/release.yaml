@@ -72,12 +72,12 @@ jobs:
           asset_name: ninjabuild-${{ env.EXT_VERSION }}.vsix
           asset_content_type: application/zip
 
-      # - name: publish
-      #   if: env.EXT_ISPREVIEW != 1 && github.repository == 'mwinters-stuff/vscode-ninja-extension'
-      #   uses: lannonbr/vsce-action@704da577da0f27de5cdb4ae018374c2f08b5f523
-      #   with:
-      #     args: "publish -p $VSCE_TOKEN"
-      #   env:
-      #     VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
+      - name: publish
+        if: env.EXT_ISPREVIEW != 1 && github.repository == 'mwinters-stuff/vscode-ninja-extension'
+        uses: lannonbr/vsce-action@704da577da0f27de5cdb4ae018374c2f08b5f523
+        with:
+          args: "publish -p $VSCE_TOKEN"
+        env:
+          VSCE_TOKEN: ${{ secrets.VSCE_TOKEN }}
 
 # TODO: check if the commit is in green state. (test-long.yml results)
