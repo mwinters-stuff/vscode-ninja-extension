@@ -1,5 +1,7 @@
 # ninjabuild README
 
+[![Release](https://github.com/mwinters-stuff/vscode-ninja-extension/actions/workflows/release.yaml/badge.svg)](https://github.com/mwinters-stuff/vscode-ninja-extension/actions/workflows/release.yaml)
+
 ## What?
 
 VS Code extension for working with ninja build cpp projects.
