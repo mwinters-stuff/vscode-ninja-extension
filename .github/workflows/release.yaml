@@ -93,8 +93,8 @@ jobs:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         with:
           upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: ./go-${{ env.EXT_VERSION }}.vsix
-          asset_name: go-${{ env.EXT_VERSION }}.vsix
+          asset_path: ./ninjabuild-${{ env.EXT_VERSION }}.vsix
+          asset_name: ninjabuild-${{ env.EXT_VERSION }}.vsix
           asset_content_type: application/zip
 
       # - name: publish

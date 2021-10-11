@@ -3,7 +3,7 @@
   "displayName": "ninjabuild",
   "description": "Ninja Build plugin",
   "publisher":"mwinters-stuff",
-  "version": "0.0.4",
+  "version": "0.0.5",
   "icon": "resources/ninja-logo.png",
   "homepage": "https://github.com/mwinters-stuff/vscode-ninja-extension",
   "repository": {"url": "https://github.com/mwinters-stuff/vscode-ninja-extension"},
