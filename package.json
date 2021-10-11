@@ -115,17 +115,17 @@
       },
       {
         "command": "ninjaCommand.createTestMateConfig",
-        "title": "CTCT: Create TestMate Config",
+        "title": "Ninja: Create TestMate Config",
         "icon": "$(test)"
       },
       {
         "command": "ninjaCommand.createCPPConfig",
-        "title": "CTCT: Create CPP Config",
+        "title": "Ninja: Create CPP Config",
         "icon": "$(settings)"
       },
       {
         "command": "ninjaCommand.flushCaches",
-        "title": "CTCT: Flush Caches and Reload",
+        "title": "Ninja: Flush Caches and Reload",
         "icon": "$(settings)"
       }
     ],

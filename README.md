@@ -116,9 +116,9 @@ will create launch.json configurations like the following depending on other set
 
 |Command|Description|
 |---|---|
-|CTCT: Create Test Config|Creates a test configuration using this extensions settings|
-|CTCT: Create CPP Config|Creates the c_cpp_properties.json files using extension settings|
-|CTCT: Flush Caches and Reload|Flushes all stored target information and reloads|
+|Ninja: Create Test Config|Creates a test configuration using this extensions settings|
+|Ninja: Create CPP Config|Creates the c_cpp_properties.json files using extension settings|
+|Ninja: Flush Caches and Reload|Flushes all stored target information and reloads|
 
 ## Getting started
 
@@ -127,7 +127,7 @@ will create launch.json configurations like the following depending on other set
 3. Use the `Flush Caches and Reload` command.
 4. After a few seconds the list of ninja targets should appear.
 
-## Warning!!
+## Warning
 
 This extension was made to work with a particular project, but was hopefully made generic enough
 to work with other ninja projects.
