@@ -69,8 +69,8 @@ jobs:
         run: |
           cat package.json | jq --arg VER "${{ env.EXT_VERSION }}" '.version=$VER' > /tmp/package.json 
           cp /tmp/package.json ./package.json
-          npm ci
-          npm run vscode:prepublish
+          yarn install
+          yarn run vscode:prepublish
       - name: package
         uses: lannonbr/vsce-action@704da577da0f27de5cdb4ae018374c2f08b5f523
         with:
