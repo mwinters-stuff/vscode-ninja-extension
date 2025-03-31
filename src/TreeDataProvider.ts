@@ -90,7 +90,7 @@ export class NinjaTreeDataProvider implements vscode.Disposable {
           }
         }
       }
-    } catch (err) {
+    } catch (err: any){
       if (err.stderr) {
         outputChannel.appendLine(err.stderr);
       }
@@ -153,7 +153,7 @@ export class NinjaTreeDataProvider implements vscode.Disposable {
                 }
                 const matchRelease = settingsCache.releaseTargetFilter?.exec(target);
                 if (matchRelease && matchRelease.length) {
-                  const simpleName = matchRelease.length == 2 ? target.replace(matchRelease[1], "") : "";
+                  const simpleName = matchRelease.length === 2 ? target.replace(matchRelease[1], "") : "";
                   releaseTargets.push(new NinjaTarget(line, simpleName, target, targetPath, vscode.TreeItemCollapsibleState.None, constants.NINJA_TARGET_RELEASE + favContext));
                   if (isFavourite) {
                     favTargets.push(new NinjaTarget(line, simpleName, target, targetPath, vscode.TreeItemCollapsibleState.None, constants.NINJA_TARGET_FAVOURITE + favContext));

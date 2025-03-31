@@ -114,7 +114,7 @@ export function variables(string: string, recursive: boolean = false){
   if(workspaces){
     let workspace = workspaces.length ? workspaces[0] : null;
     let activeFile = vscode.window.activeTextEditor?.document;
-    let absoluteFilePath = activeFile?.uri.fsPath
+    let absoluteFilePath = activeFile?.uri.fsPath;
     if(workspace && absoluteFilePath){
       string = string.replace(/\${workspaceFolder}/g, workspace?.uri.fsPath);
       string = string.replace(/\${workspaceFolderBasename}/g, workspace?.name);

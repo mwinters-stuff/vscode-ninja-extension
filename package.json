@@ -8,7 +8,7 @@
   "homepage": "https://github.com/mwinters-stuff/vscode-ninja-extension",
   "repository": {"url": "https://github.com/mwinters-stuff/vscode-ninja-extension"},
   "engines": {
-    "vscode": "^1.59.0"
+    "vscode": "^1.98.0"
   },
   "extensionDependencies": [
     "vadimcn.vscode-lldb"
@@ -19,12 +19,6 @@
   "keywords": ["c","c++","ninja","build"],
   "activationEvents": [
     "onDebug",
-    "onView:ninjaFavourites",
-    "onView:ninjaDebug",
-    "onView:ninjaRelease",
-    "onCommand:ninjaTargets.refresh",
-    "onCommand:ninjaCommand.createTestMateConfig",
-    "onCommand:ninjaCommand.createCPPConfig",
     "onCommand:workbench.action.tasks.runTask"
   ],
   "main": "./out/extension.js",
@@ -332,27 +326,31 @@
     }
   },
   "scripts": {
-    "vscode:prepublish": "yarn run compile",
-    "compile": "tsc -p ./",
-    "watch": "tsc -watch -p ./",
-    "pretest": "yarn run compile && yarn run lint",
-    "lint": "eslint src --ext ts",
-    "test": "node ./out/test/runTest.js",
-    "package": "vsce package"
+    "vscode:prepublish": "npm run package",
+    "compile": "npm run check-types && npm run lint && node esbuild.js",
+    "watch": "npm-run-all -p watch:*",
+    "watch:esbuild": "node esbuild.js --watch",
+    "watch:tsc": "tsc --noEmit --watch --project tsconfig.json",
+    "package": "npm run check-types && npm run lint && node esbuild.js --production",
+    "compile-tests": "tsc -p . --outDir out",
+    "watch-tests": "tsc -p . -w --outDir out",
+    "pretest": "npm run compile-tests && npm run compile && npm run lint",
+    "check-types": "tsc --noEmit",
+    "lint": "eslint src",
+    "test": "vscode-test"
   },
   "devDependencies": {
-    "@types/glob": "^7.1.3",
-    "@types/mocha": "^8.0.4",
-    "@types/node": "^12.11.7",
-    "@types/vscode": "^1.53.0",
-    "@typescript-eslint/eslint-plugin": "^4.14.1",
-    "@typescript-eslint/parser": "^4.14.1",
-    "eslint": "^7.19.0",
-    "glob": "^7.1.6",
-    "mocha": "^8.2.1",
-    "typescript": "^4.1.3",
-    "vscode-test": "^1.5.0",
-    "vsce": "^1.100.1"
+    "@types/vscode": "^1.98.0",
+    "@types/mocha": "^10.0.10",
+    "@types/node": "20.x",
+    "@typescript-eslint/eslint-plugin": "^8.28.0",
+    "@typescript-eslint/parser": "^8.28.0",
+    "eslint": "^9.23.0",
+    "esbuild": "^0.25.1",
+    "npm-run-all": "^4.1.5",
+    "typescript": "^5.8.2",
+    "@vscode/test-cli": "^0.0.10",
+    "@vscode/test-electron": "^2.4.1"
   },
   "dependencies": {}
 }
